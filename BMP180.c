@@ -5,13 +5,12 @@
 #include <fcntl.h>
 #include <math.h>
 
-void main() 
+int main() 
 {
 	// Create I2C bus
 	char *bus = "/dev/i2c-2";
-	file = open(bus, O_RDWR));
-	if((file < 0) 
-	{
+	int file = open(bus, O_RDWR);
+	if(file < 0){
 		printf("Failed to open the bus.\n");
 		exit(1);
 	}

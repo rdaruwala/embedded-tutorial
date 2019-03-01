@@ -18,9 +18,9 @@ This tutorial uses the following devices:
 
 First, plug the BMP180 sensor into the breakout. Using the jumper wires and resistors, wire it up to the BeagleBone according to the following schematic:
 
-![BB_BME180_Schematic](img/BME180_Outline.png)
+![BB_BMP180_Schematic](img/BMP180_Outline.png)
 
-If you know that your BME180 breakout includes pull-up resistors, you can opt to remove them from your breadboard. If you don't know what a pull-up resistor is, don't worry. We'll explain it later.
+Note that your sensor breakout may not look like the one in the picture. That's perfectly fine, just make sure that you're plugging the right wires into the right ports (VIN, GND, SCA, and SCL). If you know that your BMP180 breakout includes pull-up resistors, you can opt to remove them from your breadboard. If you don't know what a pull-up resistor is, don't worry. We'll explain it later. 
 
 Once you've connected everything, turn on the BeagleBone and connect to it via SSH. To verify that you've installed the sensor correctly, run the following command:
 
@@ -34,7 +34,7 @@ You should see a screen similiar to the following:
 //todo insert pic
 
 
-If you see `0x77`, this means that the BME180 is correctly installed!
+If you see `0x77`, this means that the BMP180 is correctly installed!
 
 Next, clone this repository:
 
@@ -54,7 +54,7 @@ Finally, run it:
 
 
 ```bash
-./bme180
+./bmp180
 ```
 
 And you'll see an output looking like:
