@@ -25,8 +25,8 @@ int main()
 	// Calibration Cofficients stored in EEPROM of the device
 	// Read 22 bytes of data from address 0xAA(170)
 	char data[22] = {0};
-	
-	if(write(file, 0xAA, 1) != 1){
+	char reg_data[1] = {0xAA};
+	if(write(file, reg_data, 1) != 1){
 		printf("I2C write error\n");
 		exit(1);
 	}
@@ -71,7 +71,8 @@ int main()
 	
 	// Read 2 bytes of data from register(0xF6)
 	// temp msb, temp lsb
-	if(write(file, 0xF6, 1)){
+	char reg[1] = {0xF6};
+	if(write(file, reg, 1)){
 		printf("I2C write data error\n");
 		exit(1);
 	}
@@ -99,7 +100,8 @@ int main()
 	
 	// Read 3 bytes of data from register(0xF6)
 	// pres msb1, pres msb, pres lsb
-	if(write(file, 0xF6, 1) != 1){
+	reg[0] = 0xF6;
+	if(write(file, reg, 1) != 1){
 		printf("I2C write data error\n");
 		exit(1);
 	}
