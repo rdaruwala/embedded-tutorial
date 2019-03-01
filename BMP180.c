@@ -8,21 +8,27 @@
 void main() 
 {
 	// Create I2C bus
-	int file;
-	char *bus = "/dev/i2c-1";
-	if((file = open(bus, O_RDWR)) < 0) 
+	char *bus = "/dev/i2c-2";
+	file = open(bus, O_RDWR));
+	if((file < 0) 
 	{
-		printf("Failed to open the bus. \n");
+		printf("Failed to open the bus.\n");
 		exit(1);
 	}
 	
 	// Get I2C device, BME180 I2C address is 0x77(119)
-	ioctl(file, I2C_SLAVE, 0x77);
+	if(ioctl(file, I2C_SLAVE, 0x77) < 0){
+		printf("Failed to set I2C address.\n");
+		exit(1);
+	}
 
 	// Calibration Cofficients stored in EEPROM of the device
 	// Read 22 bytes of data from address 0xAA(170)
 	char data[22] = {0};
-	read(file, data, 22);
+	if(read(file, data, 22) != 22){
+		printf("I2C data read error - Didn't read correct number of bytes\n");
+		exit(1);
+	}
 
 	// Convert the data
 	int AC1 = data[0] * 256 + data[1];
@@ -36,6 +42,7 @@ void main()
 	int MB = data[16] * 256 + data[17];
 	int MC = data[18] * 256 + data[19];
 	int MD = data[20] * 256 + data[21];
+	
 	sleep(1);
 
 	// Select measurement control register(0xF4)
@@ -63,26 +70,38 @@ void main()
 	// Enable pressure measurement, OSS = 1(0x74)
 	config[0] = 0xF4;
 	config[1] = 0x74;
-	write(file, config, 2);
+	
+	if(write(file, config, 2) != 2){
+		printf("I2C write data error\n");
+		exit(1);
+	}
+
 	sleep(1);
 	
 	// Read 3 bytes of data from register(0xF6)
 	// pres msb1, pres msb, pres lsb
 	reg[0] = 0xF6;
-	write(file, reg, 1);
-	read(file, data, 3);
+	if(write(file, reg, 1) != 1){
+		printf("I2C write data error\n");
+		exit(1);
+	}
+	
+	if(read(file, data, 3) != 3){
+		printf("I2C read data error\n");
+		exit(1);
+	}
 
 	// Convert the data
 	long pres = (data[0] * 65536 + (data[1] * 256) + data[2]) / 128;
 
-	// Callibration for Temperature
+	// Callibration for Temperature - See datasheet
 	long X1 = (temp - AC6) * AC5 / 32768.0;
 	long X2 = (MC * 2048.0) / (X1 + MD);
 	long B5 = X1 + X2;
 	long cTemp = ((B5 + 8.0) / 16.0) / 10.0;
 	long fTemp = cTemp * 1.8 + 32;
 
-	// Calibration for Pressure
+	// Calibration for Pressure - See datasheet
 	long B6 = B5 - 4000;
 	X1 = (B2 * (B6 * B6 / 4096.0)) / 2048.0;
 	X2 = AC2 * B6 / 2048.0;
@@ -107,10 +126,10 @@ void main()
 	X2 = ((-7357) * pressure) / 65536.0;
 	long pressure1 = (pressure + (X1 + X2 + 3791) / 16.0) / 100;
 
-	// Calculate Altitude
+	// Calculate Altitude - See datasheet
 	long altitude = 44330 * (1 - pow(pressure1/1013.25, 0.1903));
 
-	// Output data to screen
+	// Output data
 	printf("Altitude : %.2f m \n", altitude);
 	printf("Pressure : %.2f hPa \n", pressure1);
 	printf("Temperature in Celsius : %.2f C \n", cTemp);
