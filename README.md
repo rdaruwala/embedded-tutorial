@@ -8,11 +8,12 @@ A tutorial to introduce people to BadgerLoop embedded software development by cr
 At the minimum, you should be familiar with programming fundamentals (CS 300-ish), connecting to a linux computer via SSH, building basic circuits, and understanding binary & how data registers work (CS/ECE 252). Experience with basic C programming (CS/ECE 354) is recommended.
 
 This tutorial uses the following devices:
-	* [BeagleBone Black](https://beagleboard.org/black)
-	* [BMP180 Pressure Sensor](https://www.amazon.com/OctagonStar-Temperature-Barometric-Pressure-Altitude/dp/B01MAXHEK0) (Your sensor may not look like this)
-	* [Male/Male Jumper Wires](https://www.adafruit.com/product/1956)
-	* [Breadboard](https://www.adafruit.com/product/64)
-	* [2x 4.7 kOhm Resistor](https://www.exploringarduino.com/parts/4-7kohm-resistor/)
+
+* [BeagleBone Black](https://beagleboard.org/black)
+* [BMP180 Pressure Sensor](https://www.amazon.com/OctagonStar-Temperature-Barometric-Pressure-Altitude/dp/B01MAXHEK0) (Your sensor may not look like this)
+* [Male/Male Jumper Wires](https://www.adafruit.com/product/1956)
+* [Breadboard](https://www.adafruit.com/product/64)
+* [2x 4.7 kOhm Resistor](https://www.exploringarduino.com/parts/4-7kohm-resistor/)
 
 ## Running the Tutorial
 
