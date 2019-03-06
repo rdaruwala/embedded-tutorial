@@ -19,7 +19,7 @@ This tutorial uses the following devices:
 
 First, plug the BMP180 sensor into the breakout. Using the jumper wires and resistors, wire it up to the BeagleBone according to the following schematic:
 
-![BB_BMP180_Schematic](img/BMP180_Outline.png)
+![BB_BMP180_Schematic](files/BMP180_Outline.png)
 
 Note that your sensor breakout may not look like the one in the picture. That's perfectly fine, just make sure that you're plugging the right wires into the right ports (VIN, GND, SCA, and SCL). If you know that your BMP180 breakout includes pull-up resistors, you can opt to remove them from your breadboard. If you don't know what a pull-up resistor is, don't worry. We'll explain it later. 
 
