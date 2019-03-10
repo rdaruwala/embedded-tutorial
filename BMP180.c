@@ -72,7 +72,7 @@ int main()
 	// Read 2 bytes of data from register(0xF6)
 	// temp msb, temp lsb
 	char reg[1] = {0xF6};
-	if(write(file, reg, 1)){
+	if(write(file, reg, 1) != 1){
 		printf("I2C write data error\n");
 		exit(1);
 	}
@@ -154,4 +154,6 @@ int main()
 	printf("Pressure : %.2f hPa \n", pressure1);
 	printf("Temperature in Celsius : %.2f C \n", cTemp);
 	printf("Temperature in Fahrenheit : %.2f F \n", fTemp);
+	
+	return 0;
 }
