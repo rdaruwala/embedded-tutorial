@@ -32,7 +32,17 @@ i2cdetect -r 2
 You should see a screen similiar to the following:
 
 
-//todo insert pic
+```
+     0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
+00:          -- -- -- -- -- -- -- -- -- -- -- -- -- 
+10: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+20: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+40: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+50: -- -- -- -- UU UU UU UU -- -- -- -- -- -- -- -- 
+60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+70: -- -- -- -- -- -- -- 77        
+```
 
 
 If you see `0x77`, this means that the BMP180 is correctly installed!
@@ -60,4 +70,13 @@ Finally, run it:
 
 And you'll see an output looking like:
 
-//todo insert pic
+```
+Altitude : 442.29 m 
+Pressure : 961.24 hPa 
+Temperature in Celsius : 20.75 C 
+Temperature in Fahrenheit : 69.36 F 
+```
+
+This means it's working! Good job!
+
+Next, let's take a dive into the code and see how and why it works.
